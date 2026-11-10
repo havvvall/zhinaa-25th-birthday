@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 25th Birthday, Zhina ✨</title>
+<meta name="description" content="11 · 11 — a little birthday page for Zhina">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#0d0b1f; --plum:#2a1740; --rose:#f6c6d0; --gold:#f5d38a; --cream:#fff6ec;
+    --text:#fdf7f2; --muted:rgba(253,247,242,.72);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body{
+    font-family:'Poppins',system-ui,sans-serif;color:var(--text);
+    background:radial-gradient(ellipse at top,#3a1f5c 0%,var(--plum) 35%,var(--night) 80%);
+    background-attachment:fixed;min-height:100vh;overflow-x:hidden;
+  }
+  #stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+  main{position:relative;z-index:1}
+  section{position:relative;overflow-x:clip;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 24px;text-align:center}
+
+  /* ---------- HERO ---------- */
+  .date{
+    font-family:'Cormorant Garamond',serif;font-size:clamp(64px,18vw,180px);font-weight:600;letter-spacing:.04em;
+    white-space:nowrap;line-height:1;
+    animation:rise 1.4s cubic-bezier(.2,.8,.2,1) both;
+    filter:drop-shadow(0 0 30px rgba(245,211,138,.35));
+  }
+  .date span{
+    display:inline-block;
+    background:linear-gradient(110deg,var(--gold) 20%,#fff 40%,var(--rose) 60%,var(--gold) 80%);
+    background-size:250% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shine 6s linear infinite, float 5s ease-in-out infinite;
+  }
+  .date span:nth-child(3){animation-delay:0s,-2.5s}
+  .dot{opacity:.6;padding:0 .12em}
+  @keyframes shine{to{background-position:250% center}}
+  @keyframes rise{from{opacity:0;transform:translateY(40px) scale(.96)}to{opacity:1;transform:none}}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+  h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,6vw,58px);margin-top:10px;line-height:1.15}
+  h1 .ch{display:inline-block;opacity:0;transform:translateY(18px);animation:letter .6s forwards}
+  @keyframes letter{to{opacity:1;transform:none}}
+  .name{font-style:italic;color:var(--rose)}
+  .sub{margin-top:18px;color:var(--muted);font-weight:300;font-size:clamp(14px,2.6vw,17px);opacity:0;animation:fade 1.2s 2.6s forwards}
+  @keyframes fade{to{opacity:1}}
+  .scroll{position:absolute;bottom:34px;font-size:13px;letter-spacing:.2em;color:var(--muted);opacity:0;animation:fade 1s 3.4s forwards}
+  .scroll::after{content:'';display:block;width:1px;height:40px;margin:10px auto 0;background:linear-gradient(var(--gold),transparent);animation:drip 2s ease-in-out infinite}
+  @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s ease, transform 1s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,5.5vw,48px);margin-bottom:12px}
+  h2 em{color:var(--gold)}
+  .lead{color:var(--muted);max-width:520px;font-weight:300;line-height:1.7;font-size:15px}
+
+  /* ---------- NAME FLIP ---------- */
+  .flip{display:flex;gap:6px;justify-content:center;margin:34px 0 18px;perspective:600px}
+  .flip b{
+    width:clamp(44px,11vw,64px);height:clamp(56px,14vw,80px);display:grid;place-items:center;
+    font-family:'Cormorant Garamond',serif;font-size:clamp(28px,7vw,42px);font-weight:600;
+    background:rgba(255,255,255,.06);border:1px solid rgba(245,211,138,.35);border-radius:12px;
+    backdrop-filter:blur(6px);transition:transform .8s cubic-bezier(.6,-.3,.3,1.3);
+  }
+  .flip.turn b{transform:rotateY(360deg)}
+
+  /* ---------- WISHES ---------- */
+  .wishes{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;max-width:860px;width:100%;margin-top:34px}
+  .wishes li{
+    text-align:left;padding:18px 20px;border-radius:16px;background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(6px);font-weight:300;font-size:14.5px;line-height:1.55;
+    opacity:0;transform:translateY(24px) scale(.98);transition:all .7s cubic-bezier(.2,.8,.2,1);
+  }
+  .wishes li.in{opacity:1;transform:none}
+
+  /* ---------- STEP-BY-STEP WISH DECK ---------- */
+  .deck{position:relative;width:min(380px,100%);height:440px;margin-top:30px;perspective:1200px}
+  .wcard{
+    position:absolute;inset:0;border-radius:26px;padding:34px 26px 30px;overflow:hidden;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    background:linear-gradient(160deg,var(--c1),var(--c2));
+    border:1px solid rgba(255,255,255,.18);box-shadow:0 30px 60px -20px rgba(0,0,0,.6);
+    opacity:0;transform:translateX(60px) rotateY(-18deg) scale(.94);pointer-events:none;
+    transition:opacity .6s ease, transform .7s cubic-bezier(.2,.8,.2,1);
+  }
+  .wcard.active{opacity:1;transform:none;pointer-events:auto}
+  .wcard.past{opacity:0;transform:translateX(-60px) rotateY(18deg) scale(.94)}
+  .wcard .step{font-size:12px;letter-spacing:.25em;color:rgba(255,255,255,.75);text-transform:uppercase}
+  .wcard .emo{font-size:76px;margin:18px 0 10px;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35))}
+  .wcard.active .emo{animation:pop .9s cubic-bezier(.2,1.6,.4,1) both, bob 3.5s 1s ease-in-out infinite}
+  @keyframes pop{from{transform:scale(0) rotate(-20deg)}to{transform:scale(1) rotate(0)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .wcard h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:30px;line-height:1.1;margin-bottom:12px}
+  .wcard p{font-weight:300;font-size:15px;line-height:1.65;color:rgba(255,255,255,.92);max-width:300px}
+  .wcard.active h3,.wcard.active p{animation:letter .7s .25s both}
+  .wcard.active p{animation-delay:.4s}
+  .fx{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .fx i{position:absolute;top:-10%;display:block;opacity:.85;animation:fall linear infinite}
+  .fx.rain i{width:2px;height:18px;background:linear-gradient(transparent,rgba(255,255,255,.8));border-radius:2px}
+  .fx.snow i{width:7px;height:7px;background:#fff;border-radius:50%;filter:blur(.5px)}
+  .fx.lights i{width:6px;height:6px;border-radius:50%;background:#ffd36b;box-shadow:0 0 12px 4px rgba(255,190,80,.7);animation-name:glow}
+  .fx.petals i{width:10px;height:10px;border-radius:60% 0 60% 0;background:var(--p,#fff)}
+  .fx.paws i{font-style:normal;font-size:16px;animation-name:paw}
+  @keyframes fall{to{transform:translateY(560px) translateX(var(--dx,0))}}
+  @keyframes glow{0%,100%{opacity:.2;transform:scale(.6)}50%{opacity:1;transform:scale(1.2)}}
+  @keyframes paw{0%{opacity:0;transform:translateY(0)}20%{opacity:.7}100%{opacity:0;transform:translateY(-120px)}}
+  .controls{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:26px;width:min(380px,100%)}
+  .btn{
+    border:1px solid rgba(245,211,138,.5);background:rgba(255,255,255,.06);color:var(--text);
+    font:500 14px 'Poppins',sans-serif;padding:12px 20px;border-radius:999px;cursor:pointer;white-space:nowrap;
+    backdrop-filter:blur(6px);transition:transform .2s, background .2s;-webkit-tap-highlight-color:transparent
+  }
+  .btn:hover{background:rgba(245,211,138,.18)}
+  .btn:active{transform:scale(.95)}
+  .btn:disabled{opacity:.3;cursor:default}
+  .btn.primary{background:linear-gradient(120deg,var(--gold),var(--rose));color:#2a1740;border:none}
+  .dots{display:flex;gap:5px;flex:1;justify-content:center}
+  .dots span{width:6px;height:6px;flex:none;border-radius:50%;background:rgba(255,255,255,.25);transition:all .4s}
+  .dots span.on{background:var(--gold);width:20px;border-radius:6px}
+  .swipe-hint{margin-top:14px;font-size:12px;color:var(--muted);letter-spacing:.12em}
+
+  /* ---------- CAKE ---------- */
+  .cake-wrap{margin-top:40px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
+  .cake{position:relative;width:240px;height:200px;margin:0 auto}
+  .layer{position:absolute;left:50%;transform:translateX(-50%);border-radius:14px}
+  .l1{bottom:0;width:240px;height:70px;background:linear-gradient(#f3b7c4,#d98aa0)}
+  .l2{bottom:62px;width:190px;height:60px;background:linear-gradient(#fff1e4,#f1d4bd)}
+  .icing{position:absolute;bottom:112px;left:50%;transform:translateX(-50%);width:196px;height:16px;border-radius:10px;background:#fff}
+  .plate{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:280px;height:14px;border-radius:50%;background:rgba(255,255,255,.18)}
+  .candles{position:absolute;bottom:126px;left:50%;transform:translateX(-50%);display:flex;gap:34px}
+  .candle{position:relative;width:34px;height:58px;display:grid;place-items:end center}
+  .candle .num{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:56px;line-height:1;color:var(--gold);text-shadow:0 2px 0 #c79a45}
+  .flame{position:absolute;top:-30px;left:50%;width:14px;height:24px;margin-left:-7px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+    background:radial-gradient(circle at 50% 70%,#fff 0 18%,#ffd36b 40%,#ff8a3d 75%,transparent 76%);
+    box-shadow:0 0 22px 8px rgba(255,190,90,.45);animation:flicker .18s ease-in-out infinite alternate;transform-origin:50% 90%;transition:opacity .4s, transform .4s}
+  @keyframes flicker{from{transform:rotate(-4deg) scaleY(1)}to{transform:rotate(4deg) scaleY(1.08)}}
+  .out .flame{opacity:0;transform:scale(.2) translateY(10px);animation:none}
+  .smoke{position:absolute;top:-26px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:rgba(255,255,255,.5);opacity:0}
+  .out .smoke{animation:smoke 1.6s ease-out forwards}
+  @keyframes smoke{0%{opacity:.7;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-60px) scale(4)}}
+  .hint{margin-top:26px;color:var(--muted);font-size:13px;letter-spacing:.15em;text-transform:uppercase;transition:opacity .4s}
+  .wish-msg{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(24px,5vw,34px);color:var(--rose);margin-top:22px;min-height:44px;opacity:0;transition:opacity 1s}
+  .wish-msg.show{opacity:1}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:60px 24px 80px;text-align:center;color:var(--muted);font-size:13px;letter-spacing:.08em;position:relative;z-index:1}
+  footer .sig{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--text);letter-spacing:0;margin-top:6px}
+
+  #confetti{position:fixed;inset:0;pointer-events:none;z-index:5}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,.wishes li,h1 .ch,.sub,.scroll{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<canvas id="confetti"></canvas>
+
+<main>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="date"><span>11</span><span class="dot">·</span><span>11</span></div>
+    <h1 id="title" data-text="Happy 25th Birthday, |Zhina|"></h1>
+    <p class="sub">Officially the 10th. Unofficially, and more importantly, 11 · 11 ✨</p>
+    <div class="scroll">SCROLL</div>
+  </section>
+
+  <!-- NAME -->
+  <section>
+    <div class="reveal">
+      <h2>A name that works <em>both ways</em></h2>
+      <p class="lead">Read it forwards, read it backwards. Somehow it's still you.</p>
+      <div class="flip" id="flip"><b>A</b><b>Z</b><b>H</b><b>I</b><b>N</b></div>
+      <p class="lead" style="font-size:13px;letter-spacing:.12em">TAP THE LETTERS</p>
+    </div>
+  </section>
+
+  <!-- WISHES -->
+  <section>
+    <div class="reveal">
+      <h2><em>11</em> wishes for your 11 · 11</h2>
+      <p class="lead">One wish didn't feel like enough. Open them one at a time.</p>
+    </div>
+    <div class="deck reveal" id="deck">
+      <div class="wcard" style="--c1:#6b4c9a;--c2:#3b2560"><div class="fx paws" data-n="10"></div>
+        <span class="step">Wish 1 of 11</span><div class="emo">🐱</div>
+        <h3>For Sham3un</h3><p>A year full of purrs, cuddles and soft naps, and only a few knocked-over cups.</p></div>
+      <div class="wcard" style="--c1:#c9772b;--c2:#7a3a12"><div class="fx lights" data-n="14"></div>
+        <span class="step">Wish 2 of 11</span><div class="emo">🍛</div>
+        <h3>Endless biryani</h3><p>Plates of it all year, especially from Rizo. Shared, obviously. Eating biryani alone should be illegal.</p></div>
+      <div class="wcard" style="--c1:#e0457b;--c2:#ff9f1c"><div class="fx petals" data-n="16"></div>
+        <span class="step">Wish 3 of 11</span><div class="emo">🇮🇳</div>
+        <h3>India &amp; Diwali, one day</h3><p>Its colours, its lights, Diwali nights, and you in the most beautiful, colourful traditional outfit.</p></div>
+      <div class="wcard" style="--c1:#8a5a3c;--c2:#3e2417"><div class="fx lights" data-n="14"></div>
+        <span class="step">Wish 4 of 11</span><div class="emo">☕</div>
+        <h3>Good coffee &amp; tea</h3><p>The perfect cup of coffee or tea every day, warm, slow and exactly how you like it.</p></div>
+      <div class="wcard" style="--c1:#f08aa5;--c2:#b4507a"><div class="fx petals" data-n="12" style="--p:#fff3f6"></div>
+        <span class="step">Wish 5 of 11</span><div class="emo">🧁</div>
+        <h3>Sweet things</h3><p>Every dessert you make turning out perfect. (The taste-tester position is still open 😄)</p></div>
+      <div class="wcard" style="--c1:#1f7ea8;--c2:#0b3954"><div class="fx rain" data-n="18"></div>
+        <span class="step">Wish 6 of 11</span><div class="emo">💧</div>
+        <h3>The engineer</h3><p>Big success as a water resources engineer. The world needs people who take care of its water.</p></div>
+      <div class="wcard" style="--c1:#2d3f73;--c2:#141c38"><div class="fx rain" data-n="30"></div>
+        <span class="step">Wish 7 of 11</span><div class="emo">💃</div>
+        <h3>Dance in the rain</h3><p>Many rainy days to dance under, with full Nora Fatehi energy.</p></div>
+      <div class="wcard" style="--c1:#7d8fb3;--c2:#3d4a6b"><div class="fx snow" data-n="26"></div>
+        <span class="step">Wish 8 of 11</span><div class="emo">🧣</div>
+        <h3>Cozy winter</h3><p>Warm coats, soft scarves and the coziest sweater weather you've ever had.</p></div>
+      <div class="wcard" style="--c1:#9a4c7c;--c2:#4a1f3d"><div class="fx petals" data-n="14" style="--p:#ffd1e3"></div>
+        <span class="step">Wish 9 of 11</span><div class="emo">🛼</div>
+        <h3>Roller skating pro</h3><p>From the first wobbly steps to full professional. Don't worry, I'll teach you, and I'll try not to laugh 😄</p></div>
+      <div class="wcard" style="--c1:#2f6f5e;--c2:#123a30"><div class="fx lights" data-n="12"></div>
+        <span class="step">Wish 10 of 11</span><div class="emo">🎓</div>
+        <h3>Keep growing</h3><p>Always learning, always improving, maybe even a master's degree one day. Whatever you choose next, you'll master it.</p></div>
+      <div class="wcard" style="--c1:#c58b3b;--c2:#6b3f14"><div class="fx lights" data-n="18"></div>
+        <span class="step">Wish 11 of 11</span><div class="emo">👨‍👩‍👧‍👦</div>
+        <h3>Family</h3><p>Many happy years with Mom, Dad and your lovely siblings.</p></div>
+    </div>
+    <div class="controls">
+      <button class="btn" id="prev" aria-label="Previous wish">←</button>
+      <div class="dots" id="dots"></div>
+      <button class="btn primary" id="next">Next wish</button>
+    </div>
+    <p class="swipe-hint">TAP NEXT OR SWIPE</p>
+  </section>
+
+  <!-- CAKE -->
+  <section>
+    <div class="reveal">
+      <h2>Your turn to <em>make a wish</em></h2>
+      <p class="lead">Close your eyes, think of it, then tap the cake.</p>
+    </div>
+    <div class="cake-wrap reveal" id="cake">
+      <div class="cake">
+        <div class="plate"></div>
+        <div class="layer l1"></div>
+        <div class="layer l2"></div>
+        <div class="icing"></div>
+        <div class="candles">
+          <div class="candle"><span class="flame"></span><span class="smoke"></span><span class="num">2</span></div>
+          <div class="candle"><span class="flame"></span><span class="smoke"></span><span class="num">5</span></div>
+        </div>
+      </div>
+      <p class="hint" id="hint">Tap to blow out the candles</p>
+    </div>
+    <p class="wish-msg" id="wishMsg"></p>
+  </section>
+</main>
+
+<footer>
+  HAPPY BIRTHDAY, GULLI
+  <div class="sig">from Haval · 11.11.2026</div>
+</footer>
+
+<script>
+/* ---------- title letters ---------- */
+(function(){
+  const h=document.getElementById('title');
+  const parts=h.dataset.text.split('|'); let i=0;
+  parts.forEach((p,idx)=>{
+    const wrap=document.createElement('span'); if(idx===1) wrap.className='name';
+    [...p].forEach(c=>{
+      const s=document.createElement('span'); s.className='ch';
+      s.textContent=c===' '?' ':c; s.style.animationDelay=(1+i*0.05)+'s'; i++; wrap.appendChild(s);
+    });
+    h.appendChild(wrap);
+  });
+})();
+
+/* ---------- starfield ---------- */
+(function(){
+  const c=document.getElementById('stars'),x=c.getContext('2d');let w,h,stars=[];
+  function size(){w=c.width=innerWidth*devicePixelRatio;h=c.height=innerHeight*devicePixelRatio;
+    stars=Array.from({length:Math.min(220,(innerWidth*innerHeight)/5000)},()=>({x:Math.random()*w,y:Math.random()*h,r:(Math.random()*1.4+.3)*devicePixelRatio,p:Math.random()*6.28,s:Math.random()*.02+.005,up:Math.random()*.15+.03}));}
+  function draw(){x.clearRect(0,0,w,h);
+    for(const s of stars){s.p+=s.s;s.y-=s.up;if(s.y<0){s.y=h;s.x=Math.random()*w}
+      const a=.35+Math.sin(s.p)*.35;x.beginPath();x.arc(s.x,s.y,s.r,0,6.28);
+      x.fillStyle=`rgba(255,${230+Math.random()*20|0},${200},${a})`;x.fill();}
+    requestAnimationFrame(draw);}
+  addEventListener('resize',size);size();draw();
+})();
+
+/* ---------- scroll reveals ---------- */
+(function(){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.2});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+
+/* ---------- step-by-step wishes ---------- */
+(function(){
+  const cards=[...document.querySelectorAll('.wcard')],dots=document.getElementById('dots'),
+        prev=document.getElementById('prev'),next=document.getElementById('next'),deck=document.getElementById('deck');
+  let i=0;
+  // build particle effects
+  document.querySelectorAll('.fx').forEach(fx=>{
+    const n=+fx.dataset.n;
+    for(let k=0;k<n;k++){const e=document.createElement('i');
+      if(fx.classList.contains('paws'))e.textContent='🐾';
+      e.style.left=Math.random()*100+'%';
+      if(fx.classList.contains('lights')||fx.classList.contains('paws'))e.style.top=(20+Math.random()*75)+'%';
+      e.style.setProperty('--dx',(Math.random()*60-30)+'px');
+      const slow=fx.classList.contains('snow')||fx.classList.contains('petals');
+      e.style.animationDuration=(fx.classList.contains('rain')?0.7+Math.random()*.6:slow?4+Math.random()*4:2+Math.random()*3)+'s';
+      e.style.animationDelay=(-Math.random()*6)+'s';
+      fx.appendChild(e);}
+  });
+  cards.forEach(()=>dots.appendChild(document.createElement('span')));
+  function show(n){
+    i=Math.max(0,Math.min(cards.length-1,n));
+    cards.forEach((c,k)=>{c.classList.toggle('active',k===i);c.classList.toggle('past',k<i)});
+    [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
+    prev.disabled=i===0;
+    next.textContent=i===cards.length-1?'Now your wish ↓':'Next wish';
+  }
+  next.addEventListener('click',()=>{
+    if(i===cards.length-1){document.getElementById('cake').scrollIntoView({behavior:'smooth',block:'center'});return}
+    show(i+1); if(i===cards.length-1) confetti(60);
+  });
+  prev.addEventListener('click',()=>show(i-1));
+  let sx=null;
+  deck.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+  deck.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;
+    if(Math.abs(dx)>40)show(i+(dx<0?1:-1));sx=null});
+  show(0);
+})();
+
+/* ---------- name flip AZHIN <-> ZHINA ---------- */
+(function(){
+  const f=document.getElementById('flip'),letters=[...f.children];let forward=true,busy=false;
+  const A='AZHIN',Z='ZHINA';
+  f.addEventListener('click',()=>{if(busy)return;busy=true;f.classList.add('turn');
+    setTimeout(()=>{const t=forward?Z:A;letters.forEach((b,i)=>b.textContent=t[i]);forward=!forward},400);
+    setTimeout(()=>{f.classList.remove('turn');busy=false},850);});
+})();
+
+/* ---------- confetti ---------- */
+const confetti=(function(){
+  const c=document.getElementById('confetti'),x=c.getContext('2d');let ps=[],running=false;
+  function size(){c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio}
+  addEventListener('resize',size);size();
+  const cols=['#f5d38a','#f6c6d0','#ffffff','#c9a7ff','#ffb38a'];
+  function burst(n=180){const d=devicePixelRatio;
+    for(let i=0;i<n;i++)ps.push({x:c.width/2,y:c.height*.55,vx:(Math.random()-.5)*14*d,vy:(-Math.random()*14-4)*d,
+      g:.32*d,r:Math.random()*6.28,vr:(Math.random()-.5)*.3,w:(Math.random()*6+4)*d,h:(Math.random()*10+6)*d,c:cols[i%cols.length],life:0});
+    if(!running){running=true;loop()}}
+  function loop(){x.clearRect(0,0,c.width,c.height);
+    ps.forEach(p=>{p.vy+=p.g;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.life++;
+      x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.globalAlpha=Math.max(0,1-p.life/220);x.fillRect(-p.w/2,-p.h/2,p.w,p.h);x.restore();});
+    ps=ps.filter(p=>p.y<c.height+40&&p.life<220);
+    if(ps.length)requestAnimationFrame(loop);else{running=false;x.clearRect(0,0,c.width,c.height)}}
+  return burst;
+})();
+
+/* ---------- cake ---------- */
+(function(){
+  const cake=document.getElementById('cake'),hint=document.getElementById('hint'),msg=document.getElementById('wishMsg');let done=false;
+  cake.addEventListener('click',()=>{
+    if(done){confetti(80);return}
+    done=true;cake.classList.add('out');hint.style.opacity=0;
+    setTimeout(()=>{confetti(220);msg.textContent='Wish made. Now go shine ✨';msg.classList.add('show')},450);
+  });
+})();
+</script>
+</body>
+</html>
