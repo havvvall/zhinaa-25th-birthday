@@ -355,6 +355,19 @@
   .paw-trail.mini{position:relative;left:auto;bottom:auto;margin:10px auto 0;height:96px}
   .scroll::after{display:none}
 
+
+  /* ---------- performance: keep the rotating cover cheap to redraw on phones ---------- */
+  .book .face.front{overflow:visible;background-blend-mode:normal;
+    background:
+      radial-gradient(ellipse at 35% 25%,rgba(255,170,120,.22),transparent 55%),
+      radial-gradient(ellipse at 70% 95%,rgba(0,0,0,.45),transparent 60%),
+      linear-gradient(140deg,#5c1d16 0%,#7b2a1f 45%,#4a150f 100%)}
+  .book .ornate,.book .crown-wrap svg,.book .cover-leaf,.book .crown-wrap .lf{filter:none}
+  .book .foil{filter:none;animation:none;text-shadow:none}
+  .book .face.front h3.foil{-webkit-text-stroke:.4px rgba(60,15,8,.55)}
+  .book .face.front .gloss{display:none}
+  .book .cover,.book .face.front,.book .face.back{will-change:transform}
+
   #confetti{position:fixed;inset:0;pointer-events:none;z-index:5}
 
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,.wishes li,h1 .ch,.sub,.scroll{opacity:1!important;transform:none!important}}
