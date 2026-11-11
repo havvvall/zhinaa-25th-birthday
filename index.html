@@ -283,7 +283,12 @@
     transition:left 1.5s cubic-bezier(.65,0,.35,1)}
   .book .face.back{transform:rotateY(180deg);border-radius:10px 0 0 10px;
     box-shadow:0 30px 60px -20px rgba(0,0,0,.75), inset -18px 0 24px -16px rgba(110,70,30,.45)}
-  .book:not(.open):not(.closing) .cover{animation:nudge 3.2s 2s ease-in-out infinite}
+  .book:not(.open):not(.closing):not(.opening) .cover{animation:nudge 3.2s 2s ease-in-out infinite}
+  /* keep the flip light: freeze decorative animations while the cover moves */
+  .book.opening .gloss,.book.opening .foil,.book.opening .sparkles i,.book.opening .leaf,
+  .book.closing .gloss,.book.closing .foil,.book.closing .sparkles i{animation-play-state:paused}
+  .book.opening .sparkles,.book.open .sparkles{opacity:0;transition:none}
+  .book .page.right{-webkit-transform:translateZ(0)}
   @keyframes nudge{0%,82%,100%{transform:rotateY(0)}90%{transform:rotateY(-14deg)}}
   .book .tag{display:block;text-align:center;font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:.3em;color:#b26a33}
   .book .face.back h3{text-align:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(20px,5.2vw,26px);margin:2px 0 0;color:#4a2c1a;line-height:1.1}
@@ -744,8 +749,10 @@ const confetti=(function(){
   function clear(){timers.forEach(clearTimeout);timers=[]}
   function openBook(){
     if(busy)return;busy=true;setTimeout(()=>busy=false,1500);
-    book.classList.remove('closing');
+    book.classList.remove('closing');book.classList.add('opening');
+    void book.offsetWidth; // commit the paused state first, so the flip starts from a clean frame
     requestAnimationFrame(()=>requestAnimationFrame(()=>book.classList.add('open')));
+    setTimeout(()=>book.classList.remove('opening'),1700);
     hint.textContent='TAP THE BOOK TO CLOSE';
     const lns=paras.flatMap(p=>[...p.querySelectorAll('.ln')]);let t=1500;
     lns.forEach(l=>{timers.push(setTimeout(()=>l.classList.add('in'),t));t+=620});
